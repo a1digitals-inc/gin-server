@@ -1,11 +1,24 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"time"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	app := gin.Default()
-	app.GET("/getTime", *gin.Context) {
+	app.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"serverTime": time.Now().UY,
+			"Status": "Up!",
+		})
 	})
+
+	app.GET("/getTime", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"time": time.Now().UTC(),
+		})
+	})
+
+	app.Run(":8050")
 }
